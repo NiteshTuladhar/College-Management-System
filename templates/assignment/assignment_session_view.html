@@ -1,0 +1,132 @@
+{% extends 'master/master_dashboard.html' %}
+{% load static %}
+{% block title %} Dashboard | College Management System {% endblock %}
+{% block body %}
+	<!--navbar-->
+
+	{% include 'includes/dashboard_sidebar.html' %}
+	<!--end navbar -->
+	<!--model-->
+		<div class="modal fade" id="logout">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Want to leave?</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						Are you sure you want to leave?
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">Return</button>
+						<a class="btn btn-danger" href = "{% url 'logout' %}">Logout</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<!--endmodel-->
+	<!--cardssection-->
+	<section>
+		<div class="container-fluid">
+			<div class="row">
+			
+				<div class="col-lg-10 ml-auto mt-2">
+					<div class="row pt-5 mt-3 mb-5">
+						 <div class="col-xl-12 col-sm-6 p-2">
+							 <div class="details">
+								<h2>Assignments on {{session}}</h2>
+							 </div>
+
+							 <table style="  border-collapse: collapse; width: 100%; margin-top:30px;">
+								
+								 <tr>
+									 <th style="text-align:center"><h1>Question</h1></th>
+									 <th style="text-align:center"><h1>Course Name</h1></th>
+									 <th style="text-align:center"><h1>Deadline</h1></th>
+									 <th style="text-align:center"><h1>Action</h1></th>
+									 
+								 </tr>
+								 {% for c in assignment %}
+								 <tr>
+									
+									 <td style="border: 2px solid #dddddd; text-align: center; padding: 8px;">
+										
+											<h6>
+												
+													{{c.question}}
+												
+											</h6>
+										 
+									 </td>
+									 
+									 <td style="border: 2px solid #dddddd; text-align: center; padding: 8px;">
+										 
+											 <h4><a style="text-decoration: none;">
+												
+													{{c.course_id.course_name}}
+												
+											</a></h4>
+										 
+									 </td>
+									 
+									 <td style="border: 2px solid #dddddd; text-align: center; padding: 8px;">
+                                        <h4><a style="text-decoration: none;">
+												
+                                            {{c.deadline}}
+                                        
+                                    </a></h4>
+					
+												
+								 </td>
+								 <td style="border: 2px solid #dddddd; text-align: center; padding: 8px;">
+									<h4><a style="text-decoration: none;">
+											
+										<a href='{% url "assignment_check_view" c.id %}'><button class="btn btn-info">Check</button></a>
+										<a href="{% url 'assignment_edit' c.id %}"><button class="btn btn-dark">Edit</button></a>
+
+										<!--model-->
+											<div class="modal fade" id="{{c.id}}">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h4 class="modal-title">Want to delete?</h4>
+															<button type="button" class="close" data-dismiss="modal">&times;</button>
+														</div>
+														<div class="modal-body">
+																<h6>Are you sure you want to delete this assignment?</h6>
+
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+															<a class="btn btn-danger" href = "{% url 'assignment_delete' c.id %}">Yes</a>
+														</div>
+													</div>
+												</div>
+											</div>
+
+										<!--endmodel-->
+
+										<a href="" data-toggle="modal" data-target="#{{c.id}}"><button class="btn btn-danger">Delete</button></a>
+
+										
+									
+								</a></h4>
+				
+											
+							 </td>
+
+								 </tr>
+								 {% endfor %}
+							 </table>
+							 <br>
+							 <a href="{% url 'create_assignment' session.batch_of.id %}"><button type="button" class="btn btn-dark" style="float:right; margin-right: 20px;;">Add Asignment</button></a>
+						 </div>
+<script>
+	function present() {
+  document.getElementById("demo").innerHTML = "Hello World";
+}
+</script>
+
+{% endblock %}

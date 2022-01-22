@@ -1,0 +1,199 @@
+{% load static %}   
+
+
+
+        
+
+<nav class="navbar navbar-expand-md navbar-light">
+		<button class="navbar-toggler ml-auto mb-2 bg-light" type="button" data-toggle="collapse" data-target="#myNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="myNavbar">
+			<div class="container-fluid">
+				<div class="row">
+					<!--sidebar-->
+					<div class="col-xl-2 col-lg-3 col-md-4 sidebar fixed-top mt-10" style="overflow-y: auto;">
+
+							<div class="row" style="text-align:center; background-position: center;" >
+
+							<div style="">
+								{% if request.user.imageURL %}
+									<a href="{% url 'change_dp' %}"><img src="{{ request.user.imageURL }}" width="90" class="rounded-circle mt-3 ml-5" style="width: 90px;height: 90px;"></a>
+								{% else %}
+									<a href="{% url 'change_dp' %}"><img src="{% static 'images/default_pic.png' %}" width="90" class="rounded-circle mt-3 ml-5" style="width: 90px;height: auto;"></a>
+								{% endif %}
+							</div>
+
+							<div class="ml-4" style="text-align: center; position: center; padding-left:10px;">
+								<p class="text-white ml-12 mt-4 mb-2">{{request.user.full_name}}</p>
+								{% if user.is_teacher %}
+									<p class="text-white ml-12">Faculty_{{teacher_id.teacher_id}}</p>
+								{% elif user.is_student %}
+									<p class="text-white ml-12">Csit_{{request.user.id}}</p>
+								{% else %}
+									<p class="text-white ml-12">Staff_{{request.user.id}}</p>
+								{% endif %}
+								
+							</div>
+
+							
+						
+							</div>
+							<hr width="100%;">
+							<div id="#divMenu">
+						<ul class="navbar-nav flex-column mt-4">
+							
+								<li class="nav-item"><a {% if user.is_teacher %} href="{% url 'teacher_homepage' %}" {% elif user.is_student %} href="{% url 'student_dashboard' %}" {% elif  user.is_admin %} href="{% url 'dashboard' %}" {% endif %} class="nav-link text-white p-3 mb-2 {{homecurrent}}"><i class="fa fa-university text-light fa-lg mr-4"></i>Home</a></li>
+							{% if user.is_admin %}
+							<li class="nav-item"><a href="{% url 'faculty_view' %}" class="nav-link text-white p-3 mb-2 {{faculty_current}} "><i class="fa fa-chalkboard-teacher text-light fa-lg mr-4"></i>Faculty / Group</a></li>
+								<li class="nav-item"><a href="{% url 'add_new_account' %}" class="nav-link text-white p-3 mb-2 {{addcurrent}}"><i class="fa fa-users text-light fa-lg mr-4"></i>Add User</a></li>
+							{% endif %}
+
+							{% if user.is_admin %}
+								<li class="nav-item"><a href="{% url 'faculty_student_view' %}" class="nav-link text-white p-3 mb-2 {{std_current}}"><i class="fa fa-users text-light fa-lg mr-4 "></i>Students</a></li>
+							{% endif %}
+
+							{% if user.is_admin %}
+								<li class="nav-item"><a href="{% url 'teacher_view' %}" class="nav-link text-white p-3 mb-2 {{teach_current}}"><i class="fa fa-users text-light fa-lg mr-4"></i>Teacher</a></li>
+
+								
+
+								<li class="nav-item"><a href="{% url 'edit_session_status' %}" class="nav-link text-white p-3 mb-2{{s_current}}"><i class="fa fa-chalkboard-teacher text-light fa-lg mr-4"></i>Sessions Status</a></li>
+
+					
+
+							{% endif %}
+
+							
+							{% if user.is_teacher %}
+								<li class="nav-item"><a href="{% url 'teacher_faculty_view' %}" class="nav-link text-white p-3 mb-2 sidebar-link {{teachercurrent}}"><i class="fa fa-chalkboard-teacher text-light fa-lg mr-4 "></i>Faculty</a></li>
+								<li class="nav-item"><a href="{% url 'attendance_faculty_view' %}" class="nav-link text-white p-3 mb-2 sidebar-link {{current}}"><i class="fa fa-user-check text-light fa-lg mr-4"></i>Attendance</a></li>
+								<li class="nav-item"><a href="{% url 'assignment_home' %}" class="nav-link text-white p-3 mb-2 sidebar-link {{assigncurrent}}"><i class="fa fa-book text-light fa-lg mr-4"></i>Assignment</a></li>
+
+								<li class="nav-item"><a href="{% url 'lab_assignment_home' %}" class="nav-link text-white p-3 mb-2 sidebar-link {{assignlabcurrent}}"><i class="fa fa-book text-light fa-lg mr-4"></i>Lab Assignment</a></li>
+								<li class="nav-item"><a href="{% url 'assesment_home' %}" class="nav-link text-white p-3 mb-2 sidebar-link {{asseslabcurrent}}"><i class="fa fa-sticky-note text-light fa-lg mr-4"></i>Assessment</a></li>
+							{% endif %}
+							
+							
+							{% if user.is_teacher %}
+								<li class="nav-item"><a href="{% url 'lab_attendance_faculty_view' %}" class="nav-link text-white p-3 mb-2 sidebar-link {{labcurrent}}"><i class="fa fa-user-check text-light fa-lg mr-4"></i>Lab Attendance</a></li>
+							{% endif %}
+							{% if user.is_teacher %}
+								<li class="nav-item"><a href="{% url 'teacher_calendar' %}" class="nav-link text-white p-3 mb-2 sidebar-link {{calendarcurrent}}"><i class="fa fa-calendar-alt text-light fa-lg mr-4"></i> Calendar</a></li>
+							{% endif %}
+
+							{% if user.is_student %}
+								<li class="nav-item"><a href="{% url 'student_calendar' %}" class="nav-link text-white p-3 mb-2 sidebar-link {{calendarcurrent}}"><i class="fa fa-calendar-alt text-light fa-lg mr-4"></i> Calendar</a></li>
+							{% endif %}
+
+							{% if user.is_admin %}
+
+								<li class="nav-item"><a href="{% url 'calendar' %}" class="nav-link text-white p-3 mb-2 sidebar-link {{calendarcurrent}}"><i class="fa fa-calendar-alt text-light fa-lg mr-4"></i> Calender</a></li>
+								
+								
+								
+								<li class="nav-item"><a href="{% url 'listpayment' %}" class="nav-link text-white p-3 mb-2 sidebar-link  {{billcurrent}}"><i class="fa fa-handshake text-light fa-lg mr-4"></i>Bill Payment</a></li>
+
+						
+							{% endif %}
+								
+							{% if user.is_student %}
+								<li class="nav-item"><a href="{% url 'studentreport' %}" class="nav-link text-white p-3 mb-2 sidebar-link {{reportcurrent}}"><i class="fa fa-file-alt text-light fa-lg mr-4 "></i>Your Report</a></li>
+								<li class="nav-item"><a href="{% url 'payment' %}" class="nav-link text-white p-3 mb-2 sidebar-link {{billcurrent}}"><i class="fa fa-handshake text-light fa-lg mr-4 "></i>Bill Payment</a></li>
+
+								<li class="nav-item"><a href="{% url 'contactus' %}" class="nav-link text-white p-3 mb-2 sidebar-link {{contactcurrent}}"><i class="fa fa-envelope text-light fa-lg mr-4" aria-hidden="true"></i>Contact us</a></li>
+							{% endif %}
+
+
+
+						</ul>
+
+					</div>
+					</div>
+				</div>
+					<!--end sidebar-->
+
+					<!--topnav-->
+					
+				<div class="row" style="position: relative;">
+
+					<div class="col-lg-10  ml-auto bg-white fixed-top py-2 top-navbar">
+
+						<div class="row align-items-center">
+							<div class="col-md-10">
+								<h4 class="text-light text-uppercase mb-0"><img class = "image" src="{% static 'images/dashboard_img/logo.jpg' %}"></h4>
+							</div>
+						
+							<div class="col-md-1">
+								<ul class="navbar-nav">
+								
+									{% if user.is_admin %}
+									<li class="nav-item icon-parent"><a href="{% url 'view_contactus' %}" class="nav-link icon-bullet"><i class="fa fa-comments text-muted fa-lg"></i></a></li>
+									<span class="badge" style="position: absolute;top: 0px;right: 53px;padding: 4px 6px;border-radius: 70%;background: red;color: white;">{% if count != 0 %} {{count}} {% endif %}</span>
+									{% endif %}
+
+									{% if user.is_student %}
+										<li class="nav-item icon-parent"><a href="{% url 'student_msg_view' %}" class="nav-link icon-bullet"><i class="fa fa-comments text-muted fa-lg"></i></a></li>
+										<span class="badge" style="position: absolute;top: 0px;right: 153px;padding: 4px 60px;border-radius: 70%;background: red;color: white;">{% if count != 0 %} {{count}} {% endif %}</span>
+									{% endif %}
+
+
+									{% if user.is_student %}
+										<li class="nav-item ml-md-auto"><a href="{% url 'student_homepage' %}" class="nav-link"><button class="button button2">Profile</button></i></a></li>
+									{% endif %}
+									
+									<li class="nav-item ml-md-auto"><a href="" class="nav-link" data-toggle="modal" data-target="#logout"><button class="button button1">Logout</button></i></a></li>
+									
+
+									
+
+									
+								</ul>
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+					<!--endtopnav-->
+			</div>
+
+		</div>
+
+		{% if messages %}
+            {% for m in messages %}
+                <div class="alert {% if m.tags == 'success' %} alert-primary {% else %} alert-danger {% endif %}" style="text-align: center;padding-left: 250px;">
+                              {{m}}
+                </div>
+            {% endfor %}
+        {% endif %}
+	</nav>
+
+		{% if messages %}
+            {% for m in messages %}
+                <div class="alert {% if m.tags == 'success' %} alert-primary {% else %} alert-danger {% endif %}" style="text-align: center;padding-left: 250px;">
+                              {{m}}
+                </div>
+            {% endfor %}
+        {% endif %}
+	<script>
+		
+	var dropdown = document.getElementsByClassName("nav-link");
+
+	var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var dropdownContent = this.nextElementSibling;
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+  });
+}
+
+	</script>

@@ -1,0 +1,299 @@
+{% extends 'master/master_dashboard.html' %}
+{% load static %}
+{% block title %} Dashboard | College Management System {% endblock %}
+
+{% block body %}
+	<!--navbar-->
+
+	{% include 'includes/dashboard_sidebar.html' %}
+	<!--end navbar -->
+	<!--model-->
+		<div class="modal fade" id="logout">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Want to leave?</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						Are you sure you want to leave?
+						
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">Return</button>
+						<a class="btn btn-danger" href = "{% url 'logout' %}">Logout</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<!--endmodel-->
+	<!--cardssection-->
+	<section>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-10 ml-auto mt-2">
+					<div class="row pt-5 mt-3 mb-5">
+						 <div class="col-xl-3 col-sm-6 p-2">
+                  <div class="card card-common bg-danger">
+                    <div class="card-body bg-danger">
+                      <div class="d-flex justify-content-between">
+                        <i class="fa fa-book fa-3x text-white"></i>
+                        <div class="text-right text-light">
+                          <h5>Current Studying Courses</h5>
+                          <h3>{{course_count}}</h3>
+                        </div>
+                      </div> 
+
+                
+                    </div>
+              
+                  </div>
+
+                </div>
+                <div class="col-xl-3 col-sm-6 p-2">
+                  <div class="card card-common bg-primary">
+                    <div class="card-body bg-primary">
+                      <div class="d-flex justify-content-between">
+                        <i class="fa fa-check fa-3x text-light"></i>
+                        <div class="text-right text-light">
+                          <h5>Student's Avg. Performance</h5>
+                          <h3>{{total|floatformat}}</h3>
+                        </div>
+                      </div>
+
+                
+                    </div>
+              
+                  </div>
+                  
+                </div>
+                <div class="col-xl-3 col-sm-6 p-2">
+                  <div class="card card-common bg-warning">
+                    <div class="card-body bg warning">
+                      <div class="d-flex justify-content-between">
+                        <i class="fa fa-graduation-cap fa-3x text-light"></i>
+                        <div class="text-right text-light">
+                          <h5>Current Running Session</h5>
+                          <h3>{{session.semester}} th</h3>
+                        </div>
+                      </div>
+
+                
+                    </div>
+              
+                  </div>
+                  
+                </div>
+  
+                <div class="col-xl-3 col-sm-6 p-2">
+                  <div class="card card-common bg-success">
+                    <div class="card-body bg-success">
+                      <div class="d-flex justify-content-between">
+                        <i class="fa fa-users fa-3x text-light"></i>
+                        <div class="text-right text-light">
+                          <h5>Avg Present Percent</h5>
+                          <h3>{{avg_perc|floatformat}} %</h3>
+                        </div>
+                      </div>
+
+                
+                    </div>
+              
+                  </div>
+                  
+                </div>
+			</div>
+
+			  <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+  <style>
+    html,
+    body {
+      height: 100%;
+      width: 100%;
+    }
+ 
+    #myChart {
+      height: 100%;
+      width: 100%;
+      min-height: 150px;
+    }
+ 
+    .zc-ref {
+      display: none;
+    }
+  </style>
+</head>
+ 
+<body>
+  <div id='myChart'><a class="zc-ref" href="https://www.zingchart.com/">Powered by ZingChart</a></div>
+  <script>
+    ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "b55b025e438fa8a98e32482b5f768ff5"];
+    var myConfig = {
+      "type": "line",
+      "utc": true,
+      "title": {
+        "text": "{{account.user.full_name}}'s Weekly Performance Analysis",
+        "font-size": "20px",
+        "adjust-layout": true
+      },
+      "plotarea": {
+        "margin": "dynamic 45 60 dynamic",
+      },
+      "legend": {
+        "layout": "float",
+        "background-color": "none",
+        "border-width": 0,
+        "shadow": 0,
+        "align": "center",
+        "adjust-layout": true,
+        "toggle-action": "remove",
+        "item": {
+          "padding": 7,
+          "marginRight": 17,
+          "cursor": "hand"
+        }
+      },
+      "scale-x": {
+        "min-value": 1,
+        "shadow": 0,
+        "step": 1,
+        "transform": {
+  
+          "guide": {
+            "visible": false
+          },
+          "item": {
+            "visible": false
+          }
+        },
+        "label": {
+          "text" : "Week",
+          "visible": true
+        },
+        "minor-ticks": 0
+      },
+      "scale-y": {
+        "line-color": "#f6f7f8",
+        "shadow": 0,
+        "guide": {
+          "line-style": "dashed"
+        },
+        "label": {
+          "text": "Marks",
+        },
+        "minor-ticks": 0,
+        "thousands-separator": ","
+      },
+      "crosshair-x": {
+        "line-color": "#efefef",
+        "plot-label": {
+          "border-radius": "5px",
+          "border-width": "1px",
+          "border-color": "#f6f7f8",
+          "padding": "10px",
+          "font-weight": "bold"
+        },
+        "scale-label": {
+          "font-color": "#000",
+          "background-color": "#f6f7f8",
+          "border-radius": "5px"
+        }
+      },
+      "tooltip": {
+        "visible": false
+      },
+      "plot": {
+        "highlight": true,
+        "tooltip-text": "%t views: %v<br>%k",
+        "shadow": 0,
+        "line-width": "2px",
+        "marker": {
+          "type": "circle",
+          "size": 3
+        },
+        "highlight-state": {
+          "line-width": 3
+        },
+        "animation": {
+          "effect": 1,
+          "sequence": 2,
+          "speed": 100,
+        }
+      },
+	  
+      "series": [{% for c in course %}
+	  
+	  {
+	
+          "values": [
+			{% for d in int_weekly_marks %}
+	  			{% if c == d.course %}
+            		{{d.daily_internal_marks}},
+				{% endif %}
+			{% endfor %}
+          ],
+		
+          "text":"{{c.course_name}}",
+		  {% for g in course_color %}
+		  	{% if c == g.course %}
+          		"line-color": "{{g.color_code}}",
+			{% endif %}
+		  {% endfor %}
+          "legend-item": {
+			{% for g in course_color %}
+		  		{% if c == g.course %}
+            		"background-color": "{{g.color_code}}",
+				{% endif %}
+			{% endfor %}
+            "borderRadius": 5,
+            "font-color": "white"
+          },
+		  
+          "legend-marker": {
+            "visible": false
+          },
+		  
+          "marker": {
+			  {% for g in course_color %}
+		  		{% if c == g.course %}
+            "background-color": "{{g.color_code}}",
+            "border-width": 1,
+            "shadow": 0,
+            "border-color": "{{g.color_code}}"
+			{% endif %}
+		  {% endfor %}
+          },
+          "highlight-marker": {
+            "size": 6,
+            "background-color": "#007790",
+          }
+		  
+        },
+		
+		{% endfor %}
+		]
+	};
+ 
+    zingchart.render({
+      id: 'myChart',
+      data: myConfig,
+      height: '100%',
+      width: '100%'
+    });
+  </script>	
+		</div>
+	</section>
+
+	
+
+	
+	<!--endcardsection-->
+{% endblock %}
+
+{% block js %}
+	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity=sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/popper.min.js"></script>
+	<script src="script.js"></script>
+{% endblock js %}

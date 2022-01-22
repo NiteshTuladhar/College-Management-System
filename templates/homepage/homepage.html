@@ -1,0 +1,217 @@
+{% extends 'master/master_dashboard.html' %}
+{% load static %}
+{% block title %} Dashboard | College Management System {% endblock %}
+{% block body %}
+	<!--navbar-->
+
+	{% include 'includes/dashboard_sidebar.html' %}
+	<!--end navbar -->
+	<!--model-->
+  <style>
+  .text-white-50 { color: rgba(255, 255, 255, .5); }
+.bg-blue { background-color:#00b5ec; }
+.border-bottom { border-bottom: 1px solid #e5e5e5; }
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+  </style>
+
+		<div class="modal fade" id="logout">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Want to leave?</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						Are you sure you want to leave?
+						
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">Return</button>
+						<a class="btn btn-danger" href = "{% url 'logout' %}">Logout</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<!--endmodel-->
+	<!--cardssection-->
+	<section>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-10 ml-auto mt-2">
+					<div class="row pt-5 mt-3 mb-5">
+						 <div class="col-xl-3 col-sm-6 p-2">
+                  <div class="card card-common bg-danger">
+                    <div class="card-body bg-danger">
+                      <div class="d-flex justify-content-between">
+                        <i class="fa fa-users fa-3x text-white"></i>
+                        <div class="text-right text-light">
+                          <h5>Total Students</h5>
+                          <h3>{{student}}</h3>
+                        </div>
+                      </div> 
+
+                
+                    </div>
+              
+                  </div>
+
+                </div>
+                <div class="col-xl-3 col-sm-6 p-2">
+                  <div class="card card-common bg-primary">
+                    <div class="card-body bg-primary">
+                      <div class="d-flex justify-content-between">
+                        <i class="fa fa-male fa-3x text-light"></i>
+                        <div class="text-right text-light">
+                          <h5>Faculty Staff</h5>
+                          <h3>{{staff}}</h3>
+                        </div>
+                      </div>
+
+                
+                    </div>
+              
+                  </div>
+                  
+                </div>
+                <div class="col-xl-3 col-sm-6 p-2">
+                  <div class="card card-common bg-warning">
+                    <div class="card-body bg warning">
+                      <div class="d-flex justify-content-between">
+                        <i class="fa fa-chalkboard-teacher fa-3x text-light"></i>
+                        <div class="text-right text-light">
+                          <h5>Total Teacher</h5>
+                          <h3>{{teacher}}</h3>
+                        </div>
+                      </div>
+
+                
+                    </div>
+              
+                  </div>
+                  
+                </div>
+  
+               <!-- <div class="col-xl-3 col-sm-6 p-2">
+                  <div class="card card-common bg-success">
+                    <div class="card-body bg-success">
+                      <div class="d-flex justify-content-between">
+                        <i class="fa fa-book-open fa-3x text-light"></i>
+                        <div class="text-right text-light">
+                          <h5>Total Course</h5>
+                          <h3>{{course}}</h3>
+                        </div>
+                      </div>
+
+                
+
+                
+                    </div>
+              
+                  </div>
+                  
+                </div>-->
+
+                <div class="col-xl-3 col-sm-6 p-2">
+                  <div class="card card-common bg-success">
+                    <div class="card-body bg-success">
+                      <div class="d-flex justify-content-between">
+                        <i class="fa fa-building fa-3x text-light"></i>
+                        <div class="text-right text-light">
+                          <h5>Total Faculty</h5>
+                          <h3>{{faculty}}</h3>
+                        </div>
+                      </div>
+
+                
+
+                
+                    </div>
+              
+                  </div>
+                  
+                </div>
+            <div class="col-xl-6 col-sm-6 p-2">
+						<main role="main" class="container bootdey.com">
+ 
+
+  <div class="my-3 p-3 bg-white rounded box-shadow">
+    <h6 class="border-bottom border-gray pb-2 mb-0">Recent Notice</h6>
+    {% for notice in notices %}
+    {% if notice.type == "Notice" %}
+    <div class="media text-muted pt-3">
+
+        {% if notice.notice_annoucer.imageURL %}
+          <img src="{{ notice.notice_annoucer.imageURL }}" alt="" class="mr-2 rounded" width="32" height="32">
+          {% else %}
+            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="mr-2 rounded" width="32" height="32">
+        {% endif %}
+      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark">@{{notice.notice_annoucer.full_name}}</strong>
+        <strong class="d-block text-gray-dark" style="font-weight: 200;">{{notice.notice_date}}</strong>
+        <br>
+        {{notice.notice_description}}
+      </p>
+    </div>
+    {% endif %}
+    {% endfor %}
+    <small class="d-block text-right mt-3">
+      <a href="{% url 'admin_add_notice' %}">Add Notice</a>
+    </small>
+  </div>
+</main>
+</div>
+
+<div class="col-xl-6 col-sm-6 p-2">
+            <main role="main" class="container bootdey.com">
+ 
+
+  <div class="my-3 p-3 bg-white rounded box-shadow">
+    <h6 class="border-bottom border-gray pb-2 mb-0">Recent Announcements</h6>
+    {% for notice in notices %}
+    {% if notice.type == "Announcement" %}
+    <div class="media text-muted pt-3">
+
+    {% if notice.notice_annoucer.imageURL %}
+          <img src="{{ notice.notice_annoucer.imageURL }}" alt="" class="mr-2 rounded" width="32" height="32">
+          {% else %}
+            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="mr-2 rounded" width="32" height="32">
+        {% endif %}
+
+      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+        <strong class="d-block text-gray-dark">@{{notice.notice_annoucer.full_name}}</strong>
+        <strong class="d-block text-gray-dark" style="font-weight: 200;">{{notice.notice_date}}</strong>
+        <br>
+        {{notice.notice_description}}
+      </p>
+    </div>
+    {% endif %}
+    {% endfor %}
+    <small class="d-block text-right mt-3">
+      <a href="{% url 'admin_add_announcement' %}">Add Announcements</a>
+    </small>
+  </div>
+</main>
+</div>
+					</div>
+				
+				</div>
+			
+
+			</div>
+		
+		</div>
+
+
+	</section>
+
+
+	<!--endcardsection-->
+{% endblock %}
+
+{% block js %}
+	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity=sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/popper.min.js"></script>
+	<script src="script.js"></script>
+{% endblock js %}

@@ -1,0 +1,107 @@
+{% extends 'master/master_dashboard.html' %}
+{% load static %}
+{% block title %} Dashboard | College Management System {% endblock %}
+{% block body %}
+	<!--navbar-->
+
+	{% include 'includes/dashboard_sidebar.html' %}
+	<!--end navbar -->
+	<!--model-->
+		<div class="modal fade" id="logout">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Want to leave?</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						Are you sure you want to leave?
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">Return</button>
+						<a class="btn btn-danger" href = "{% url 'logout' %}">Logout</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<!--endmodel-->
+	<!--cardssection-->
+	<section>
+		<div class="container-fluid">
+			<div class="row">
+			
+				<div class="col-lg-10 ml-auto mt-2">
+					<div class="row pt-5 mt-3 mb-5">
+						 <div class="col-xl-12 col-sm-6 p-2">
+							 <div class="details">
+								<h2>{{session}}</h2>
+								<h2>Subject: {{course}}</h2>
+								<h4>Total Present = {{a}} || Total Absent = {{b}}</h4>
+							 </div>
+
+							 <table style="  border-collapse: collapse; width: 100%; margin-top:30px;">
+								
+								 <tr>
+									 <th style="text-align:center"><h1>Roll no</h1></th>
+									 <th style="text-align:center"><h1>STUDENT NAME</h1></th>
+									 <th style="text-align:center"><h1>STATUS</h1></th>
+									 
+								 </tr>
+								 {% for stu in student %}
+								 <tr>
+									
+									 <td style="border: 2px solid #dddddd; text-align: center; padding: 8px;">
+										
+											<h4>
+												
+													{{stu.roll_no}}
+												
+											</h4>
+										 
+									 </td>
+									 
+									 <td style="border: 2px solid #dddddd; text-align: center; padding: 8px;">
+										 
+											 <h4><a style="text-decoration: none;">
+												
+													{{stu.user}}
+												
+											</a></h4>
+										 
+									 </td>
+									 
+									 <td style="border: 2px solid #dddddd; text-align: center; padding: 8px;">
+										{% for c in att %}
+											<h4>
+												{% if c.student_id.id == stu.id %}
+													{% if c.status == True %}
+														<a href=''><button type="submit" onclick='present()' class="btn btn-info"  name ='present'> Is Present</button></a>
+													{% elif c.status == False %}
+														<a href=''><button type="submit" onclick='present()' class="btn btn-danger"  name ='present'>Not Present</button></a>
+													{% endif %}
+												{% endif %}
+											</h4>
+										{% endfor %}
+										
+											<a href='{% url 'lab_attendance_preseent' stu.id %}'><button type="submit" onclick='present()' class="btn btn-success"  name ='present'>Lab Present</button></a>
+											<a href='{% url 'lab_attendance_absent' stu.id %}'><button type="submit" class="btn btn-danger" name = 'absent'>Lab Absent</button></a>
+					
+												
+								 </td>
+
+								 </tr>
+								 {% endfor %}
+							 </table>
+							 <div class="row pt-5" style="float: right;margin: 0 auto; ">
+								<a href="{% url 'lab_attendance_group_view' sid %}"><button class="btn btn-dark" style="padding-right: 15px; padding-left: 15px; ">Done</button></a>
+							</div>
+						 </div>
+<script>
+	function present() {
+  document.getElementById("demo").innerHTML = "Hello World";
+}
+</script>
+
+{% endblock %}

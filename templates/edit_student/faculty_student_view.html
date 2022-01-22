@@ -1,0 +1,71 @@
+{% extends 'master/master_dashboard.html' %}
+{% load static %}
+{% block title %} Dashboard | College Management System {% endblock %}
+{% block body %}
+	<!--navbar-->
+
+	{% include 'includes/dashboard_sidebar.html' %}
+	<!--end navbar -->
+	<!--model-->
+		<div class="modal fade" id="logout">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Want to leave?</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						Are you sure you want to leave?
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">Return</button>
+						<a class="btn btn-danger" href = "{% url 'logout' %}">Logout</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<!--endmodel-->
+	<!--cardssection-->
+	<section>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-10 ml-auto mt-2">
+					<div class="row pt-5 mt-3 mb-5">
+						 <div class="col-xl-12 col-sm-6 p-2">
+							 <main role="main" class="container bootdey.com">
+							<div class="my-3 p-3 bg-white rounded box-shadow" >
+								<h1 class="border-bottom border-gray pb-2 mb-0" style="margin: 20px;">Student Info</h1>
+							<table style="  border-collapse: collapse; width: 90%; margin:30px;">
+								 <tr>
+									 <th style="text-align:center"><h1>ID</h1></th>
+									 <th style="text-align:center"><h1>FACULTY</h1></th>
+									 
+								 </tr>
+								 <tr>
+									 <td style="border: 2px solid #dddddd; text-align: center; padding: 8px;">
+										 {% for f in faculty %}
+											<h4>{{f.id}}</h4>
+										 {% endfor %}
+									 </td>
+									 <td style="border: 2px solid #dddddd; text-align: center; padding: 8px;">
+										 {% for f in faculty %}
+										 	<h4><a style="text-decoration: none;" href="{% url 'faculty_batch_view' f.id %}"> {{f}}</a></h4>
+										 {% endfor %}
+									 </td>
+
+									
+
+
+								 </tr>
+							 </table>
+						 </div>
+
+
+
+
+
+
+{% endblock %}
+

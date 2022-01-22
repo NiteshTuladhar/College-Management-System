@@ -1,0 +1,111 @@
+{% extends 'master/master_dashboard.html' %}
+{% load static %}
+{% block title %} Dashboard | College Management System {% endblock %}
+{% block body %}
+
+	<!--navbar-->
+
+	{% include 'includes/dashboard_sidebar.html' %}
+	<!--end navbar -->
+	<!--model-->
+		<div class="modal fade" id="logout">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Want to leave?</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						Are you sure you want to leave?
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">Return</button>
+						<a class="btn btn-danger" href = "{% url 'logout' %}">Logout</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<!--endmodel-->
+	<!--cardssection-->
+	<section>
+		<div class="container-fluid">
+			<div class="row">
+			
+				<div class="col-lg-10 ml-auto mt-2">
+					<div class="row pt-5 mt-3 mb-5">
+						 <div class="col-xl-12 col-sm-6 p-2">
+							 <div class="details">
+                                <h2>Assignments on {{ass.course_id}}</h2>
+                                <h4>Created on: {{ass.date}}</h4>
+                                <h4>Deadline on: {{ass.deadline}}</h4>
+							 </div>
+
+							 <table style="  border-collapse: collapse; width: 100%; margin-top:30px;">
+								
+								 <tr>
+									 <th style="text-align:center"><h1>Roll No</h1></th>
+									 <th style="text-align:center"><h1>Student Name</h1></th>
+									 <th style="text-align:center"><h1>Status</h1></th>
+									 
+									 
+								 </tr>
+								 {% for stu in students %}
+								 <tr>
+									
+									 <td style="border: 2px solid #dddddd; text-align: center; padding: 8px;">
+										
+											<h4>
+												
+													{{stu.roll_no}}
+												
+											</h4>
+										 
+									 </td>
+									 
+									 <td style="border: 2px solid #dddddd; text-align: center; padding: 8px;">
+										 
+											 <h4><a style="text-decoration: none;">
+												
+													{{stu.user}}
+												
+											</a></h4>
+										 
+									 </td>
+									 
+									 <td style="border: 2px solid #dddddd; text-align: center; padding: 8px;">
+                                        
+												
+										<div class="dropdown">
+											{% for c in checks %}
+												 {% if stu.id == c.student_id.id %} 
+												<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											  	
+												  {{c.submitted}}
+												  
+											
+												</button>
+												{% endif %} 
+											{% endfor %}
+											<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+											  <a class="dropdown-item" href="{% url 'assignment_done' stu.id ids 0 %}">Submitted</a>
+											  <a class="dropdown-item" href="{% url 'assignment_done' stu.id ids 1 %}">Not Submitted</a>
+											</div>
+										  </div>
+					
+												
+								 </td>
+
+
+								 </tr>
+								 {% endfor %}
+							 </table>
+							 <div class="row pt-5" style="float: right;margin: 0 auto; ">
+						 <a href="{% url 'assignment_session_view' batch.id %}"><button type="submit" class="btn btn-dark">Done</button></a>
+						</div>
+						 </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+
+{% endblock %}

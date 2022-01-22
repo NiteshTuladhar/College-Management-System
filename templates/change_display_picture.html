@@ -1,0 +1,76 @@
+{% extends 'master/master_dashboard.html' %}
+{% load static %}
+{% block title %} Dashboard | College Management System {% endblock %}
+{% block body %}
+	<!--navbar-->
+
+	{% include 'includes/dashboard_sidebar.html' %}
+	<!--end navbar -->
+	<!--model-->
+		<div class="modal fade" id="logout">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Want to leave?</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						Are you sure you want to leave?
+						
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">Return</button>
+						<a class="btn btn-danger" href = "{% url 'logout' %}">Logout</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<!--endmodel-->
+	<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-10 ml-auto mt-2">
+					<div class="row pt-5 mt-3 mb-5">
+		<div class="col-xl-11 col-sm-6 p-2">
+
+            <div id="test1" style="width:100%; height:400px;text-align: justify;background-image:url('{% static 'img/change_profile_pic.jpg' %}');border:3px dashed #C1C7C9; background-color: #fff;  margin: 30px    200px 20px 20px; 
+                    /* top, left, bottom*/ 
+                    padding: 10px 20px 30px; 
+                    float: left; "> 
+                    <div class="container pl-5 pr-5">
+                       <p style="text-align: center;font-family: 'Helvetica';padding-top: 15%;"><b>Select the image that you want to upload.</b></p>
+                       <form enctype="multipart/form-data" method="POST" name="profile_image">
+                          <div class="form" style="padding-left: 90px;">
+                            {% csrf_token %}
+                            <input type="file" name="profile_image" required>
+                          </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary" 
+                                  style="background-color: #F79562;
+                                  margin: 10px auto 100px 300px; 
+                                        border: none;
+                                        color: white;
+                                        padding-bottom: 50px;
+                                        padding: 15px 32px;
+                                        text-align: center;
+                                        text-decoration: none;
+                                        display: inline-block;
+                                        font-size: 16px;"><b>Upload</b></button>
+                        </form>
+                    </div>
+            </div> 
+       
+    </div>
+</div>
+    </div>
+</div>
+</div>
+	
+{% endblock %}
+
+{% block js %}
+	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity=sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/popper.min.js"></script>
+	<script src="script.js"></script>
+{% endblock js %}

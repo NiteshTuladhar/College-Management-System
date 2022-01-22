@@ -1,0 +1,108 @@
+{% extends 'master/master_dashboard.html' %}
+{% load static %}
+{% block title %} Dashboard | College Management System {% endblock %}
+{% block body %}
+	<!--navbar-->
+
+	{% include 'includes/dashboard_sidebar.html' %}
+	<!--end navbar -->
+	<!--model-->
+		<div class="modal fade" id="logout">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Want to leave?</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						Are you sure you want to leave?
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">Return</button>
+						<a class="btn btn-danger" href = "{% url 'logout' %}">Logout</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+<section>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-10 ml-auto mt-2">
+					<div class="row pt-5 mt-3 mb-5">
+
+            <div class="col-xl-12 col-sm-6 p-2">
+						<main role="main" class="container bootdey.com">
+ 
+
+  <div class="my-3 p-3 bg-white rounded box-shadow">
+    <h1 class="border-bottom border-gray pb-2 mb-0" style="margin: 20px;">Payment List</h1>
+    						<div style="padding-bottom:50px;margin-top:-50px;margin-right:25px;">
+                                <a href="{% url 'createpayment' %}" class="btn btn-sm mb-2 mt-0 mb-3" style="background-color: #F9B08A; text-decoration: none; color: #ffffff;float:right;"> <i class='fa fa-plus'></i> Create Payment</a>
+                            </div>
+                            {% if payments %}
+								{% for p in payments %}
+								<div class="my-3 p-3 bg-white rounded box-shadow">
+									
+									
+										
+											<div class="media text-muted pt-3">
+
+										
+	  									<p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+											<strong class="d-block text-gray-dark" style="font-size:22px;font-weight:bold;">{{p.payment_name}}</strong>
+											<strong class="d-block text-gray-dark" style="font-size:15px;font-weight: semi-bold;">Amount : {{p.amount}}</strong>
+											
+											<a href="{% url 'payment_edit' p.id %}" class="btn btn-sm mb-2 mt-3 mb-3" style="background-color: #0072CF; text-decoration: none; color: #ffffff;">Edit Payments</a>
+											<a href="{% url 'payment_delete' p.id %}" class="btn btn-sm mb-2 mt-3 mb-3" style="background-color: #dc3545; text-decoration: none; color: #ffffff;">Delete Payments</a>
+										</div>
+										
+									
+									
+								</div>
+                                
+								{% endfor %}
+									{% else %}
+
+									<div class="my-3 p-3 bg-white rounded box-shadow" style='text-align:center;'>
+									
+									
+										
+											
+										<h5 style="text-align:center;">YOU HAVE NOT CREATED ANY PAYMENTS.</h5>
+                                    
+										
+	  									
+											
+								
+										</div>
+										
+									
+									
+								</div>
+										
+									{% endif %}
+
+  </div>
+</main>
+</div>
+
+					</div>
+				
+				</div>
+			
+
+			</div>
+		
+		</div>
+
+
+	</section>
+{% endblock %}
+
+

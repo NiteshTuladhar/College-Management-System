@@ -1,0 +1,167 @@
+
+
+{% extends 'master/master_dashboard.html' %}
+{% load static %}
+{% block title %} Dashboard | College Management System {% endblock %}
+{% block body %}
+	<!--navbar-->
+<style>
+    
+        td {
+        border: 2px solid #726E6D;
+        padding: 30px;
+        }
+
+        thead{
+        font-weight:bold;
+        text-align:center;
+        background: #625D5D;
+        color:white;
+        }
+
+        table {
+        border-collapse: collapse;
+        }
+
+        .footer {
+        text-align:right;
+        font-weight:bold;
+        }
+
+        tbody >tr:nth-child(odd) {
+            background: #D1D0CE;
+        }
+    
+</style>
+
+	{% include 'includes/dashboard_sidebar.html' %}
+	<!--end navbar -->
+	<!--model-->
+
+
+		<div class="modal fade" id="logout">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Want to leave?</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						Are you sure you want to leave?
+						
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">Return</button>
+						<a class="btn btn-danger" href = "{% url 'logout' %}">Logout</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<!--endmodel-->
+	<!--cardssection-->
+	<section>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-10 ml-auto mt-2">
+					<div class="row pt-5 mt-3 mb-5">
+
+            <div class="col-xl-12 col-sm-6 p-2">
+						<main role="main" class="container bootdey.com">
+ 
+
+<div class="my-3 p-3 bg-white rounded box-shadow" style='text-align:center;'>
+    <h1 class="border-bottom border-gray pb-3 mb-3 mt-3">Your Report</h1>
+        <table style="margin-left:auto;margin-right:auto;">
+                                    <thead>
+                                    <tr>
+                                        <td colspan="3">Course </td>
+                                        <td rowspan="2"> Semester </td>
+                                        <td rowspan="2"> Credits </td>
+                                        <td colspan="2"> Grade </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Code </td>
+                                        <td colspan="2"> Name </td>
+                                        <td> Letter </td>
+                                        <td> Points </td>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for i in intmarks %}
+                                    
+                                    <tr>
+                                        <td>{{i.course.course_no}} </td>
+                                        <td colspan="2">{{i.course.course_name}} </td>
+                                        <td> {{i.course.session_id.semester}}</td>
+                                        <td> {{i.course.credit}} </td>
+                                        <td> A </td>
+                                        <td> {{i.calculateInternalMarks | floatformat}} </td>
+                              
+                                    </tr>
+                                    
+                                    {% endfor %}
+                                    
+                                    
+                                
+                                    </tbody>
+                                    <tfoot>
+                                    <tr>
+                                        <td colspan="4" class="footer">Total</td>
+                                        <td> {{credit}} </td>
+                                        <td colspan="2">{{total_marks | floatformat}} </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="4" class="footer">Your Academic Performance<br>
+                                        According to Algorithm is
+                                    </td>
+                                        <td colspan="3"> {{algo}} </td>
+                                    </tr>
+
+    
+                                </tfoot>
+
+                                
+  
+  
+  
+  
+  
+  
+  
+    </table>
+  
+  
+  <div class='pt-5 pb-5'>
+  
+    <a href="{% url 'student_report_render_pdf_view' request.user.id %}"><button class='btn btn-primary pt-3 pb-3 pl-5 pr-5' style='background-color:#FD7D38;color:white;border:2px solid white;border-radius:30px'> Download Report</button></a>
+</div>
+  </div>
+</main>
+</div>
+
+					</div>
+				
+				</div>
+			
+
+			</div>
+
+            
+		
+		</div>
+
+        
+	</section>
+
+
+
+	<!--endcardsection-->
+{% endblock %}
+
+{% block js %}
+	<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity=sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/popper.min.js"></script>
+	<script src="script.js"></script>
+{% endblock js %}

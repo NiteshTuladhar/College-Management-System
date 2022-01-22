@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esewa Payment</title>
+    <style>
+        #esewa{
+            display:none;
+        }
+    </style>
+</head>
+<body>
+    <center><h2>You will be redirected to the Esewa Payment Form</h2></center>
+    <form action="https://uat.esewa.com.np/epay/main" method="POST" id="esewa">
+    <input value="{{amount}}" name="tAmt" type="hidden">
+    <input value="{{amount}}" name="amt" type="hidden">
+    <input value="0" name="txAmt" type="hidden">
+    <input value="0" name="psc" type="hidden">
+    <input value="0" name="pdc" type="hidden">
+    <input value="EPAYTEST" name="scd" type="hidden">
+    <input value="{{payment_info.transaction_id}}" name="pid" type="hidden">
+    <input value="http://localhost:8000{% url 'esewa_success' payment_info.id %}?q=su" type="hidden" name="su">
+    <input value="{{request.build_absolute_uri}}" type="hidden" name="fu">
+    <input value="Submit" type="submit">
+    </form>
+
+    <script>
+        setTimeout(function(){
+            document.getElementById('esewa').submit()
+        }, 500)
+    </script>
+</body>
+</html>

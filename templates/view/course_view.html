@@ -1,0 +1,100 @@
+{% extends 'master/master_dashboard.html' %}
+{% load static %}
+{% block title %} Dashboard | College Management System {% endblock %}
+{% block body %}
+	<!--navbar-->
+
+	{% include 'includes/dashboard_sidebar.html' %}
+	<!--end navbar -->
+	<!--model-->
+		<div class="modal fade" id="logout">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Want to leave?</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						Are you sure you want to leave?
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">Return</button>
+						<a class="btn btn-danger" href = "{% url 'logout' %}">Logout</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<!--endmodel-->
+	<!--cardssection-->
+	<section>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-10 ml-auto mt-2">
+					<div class="row pt-5 mt-3 mb-5">
+						 <div class="col-xl-12 col-sm-6 p-2">
+							 <table style="  border-collapse: collapse; width: 100%; margin-top:30px;">
+								 <tr>
+									 <th style="text-align:center"><h1>ID</h1></th>
+									 <th style="text-align:center"><h1>Course</h1></th>
+									 <th style="text-align:center"><h1>ACTION</h1></th>
+								 </tr>
+								 {% for c in course %}
+								 <tr>
+									 <td style="border: 2px solid #dddddd; text-align: center; padding: 8px;">
+										 
+											<h4>{{c.id}}</h4>
+										 
+									 </td>
+									 <td style="border: 2px solid #dddddd; text-align: center; padding: 8px;">
+
+										 
+										 	
+
+										 
+										 	<h4> {{c}}</h4>
+										 
+
+									 </td>
+
+									 <td style="border: 2px solid #dddddd; text-align: center; padding: 8px;">
+										 
+										 	
+										 		<a href="{% url 'edit_course' c.id %}"><button type="submit"  class="btn btn-info"  name ='edit'> Edit</button></a>
+
+										 		<!--model-->
+											<div class="modal fade" id="{{c.id}}">
+												<div class="modal-dialog">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h4 class="modal-title">Want to delete?</h4>
+															<button type="button" class="close" data-dismiss="modal">&times;</button>
+														</div>
+														<div class="modal-body">
+																<h6>Are you sure you want to remove '{{c}}'?</h6>
+
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+															<a class="btn btn-danger" href = "{% url 'delete_course' c.id %}">Yes</a>
+														</div>
+													</div>
+												</div>
+											</div>
+
+										<!--endmodel-->
+
+										<a href=""  data-toggle="modal" data-target="#{{c.id}}"><button class="btn btn-danger">Remove</button></a>
+										
+										 
+									 </td>
+
+
+								 </tr>
+								 {% endfor %}
+							 </table>
+							 <button type="submit"  class="btn btn-dark" style="float:right;"><a class="btm btn-dark" href="{% url 'edit_course_form' session.id %}" style="text-decoration: None;"> Add Course</a></button>
+						 </div>
+{% endblock %}
+

@@ -1,0 +1,35 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width-device-width, initial-scale=1. shrink-to-fit=no">
+	<link rel="title icon" href="images/title-img.png">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+	<script src="https://use.fontawesome.com/releases/v5.14.0/js/all.js" data-auto-replace-svg="nest"></script>
+	<link href="https://api.fontshare.com/css?f[]=chillax@500&display=swap" rel="stylesheet">
+	<link rel="icon" href="" src="{% static 'images/dashboard_img/logo.jpg' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/dashboard_css/style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/calendar_style.css' %}">
+
+	<title>{% block title %} {% endblock %}</title>
+
+</head>
+<body>
+
+{% block body %}
+
+{% endblock %}
+
+
+{% block js %}
+
+{% endblock js %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity=sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/popper.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

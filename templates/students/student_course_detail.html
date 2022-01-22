@@ -1,0 +1,201 @@
+{% extends 'master/student_master.html' %}
+
+{% block body %}
+<div class="col-xl-12 col-sm-12 p-2">
+    <div class="card card-common bg-danger">
+        <div class="card-body bg-info">
+            <div class="d-flex justify-content-between">
+                <div class='course' style="color:white;">
+                    <div class="coursedetail" style="margin-left: 390px;">
+                        <h4><i class="fa fa-book fa-1x text-white"></i> COURSE DETAIL <i class="fa fa-book fa-1x text-white"></i></h4>
+                    </div>
+                    <div class="courseinfo" style="border: 1px solid white; float:left; margin-left:220px; margin-top:10px; width: 560px;;">
+                        <div class="courseinfo1" style=" margin-left:10px; margin-top:10px; text-align: center;">
+                            <h6>Course ID: {{course_detail.course_no}}</h6>
+                            <h6>Course Name: {{course_detail.course_name}}</h6>
+                            <h6>Taught By: {{course_detail.teacher_id}}</h6>
+                            <h6>Semester: {{course_detail.session_id.semester}}</h6>
+                        </div>
+            </div>
+            </div> 
+
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+<div class="col-xl-12 col-sm-12 p-2">
+    <div class="card card-common bg-danger">
+        <div class="card-body bg-info">
+            <div class="d-flex justify-content-between">
+                <div class='course' style="color:white;">
+                    <div class="coursedetail" style="margin-left: 360px;">
+                        <h4><i class="fa fa-graduation-cap fa-1x text-white"></i> ATTENDANCE DETAIL <i class="fa fa-graduation-cap fa-1x text-white"></i></h4>
+                    </div>
+                    <div class="courseinfo" style="border: 1px solid white; float:left; margin-left:220px; margin-top:10px; width: 560px;;">
+                        <div class="courseinfo1" style=" margin-left:10px; margin-top:10px; text-align: center;">
+                            <h6>Present Days: {{attendance_present}}</h6>
+                            <h6>Absent Days: {{attendance_absent}}</h6>
+                            <h6>Total Days: {{total_attendance}}</h6>
+                            <h6>Total Percentage (Present): {{percentage}}%</h6>
+                        </div>
+            </div>
+            </div> 
+
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+<div class="col-xl-12 col-sm-12 p-2">
+    <div class="card card-common bg-danger">
+        <div class="card-body bg-info">
+            <div class="d-flex justify-content-between">
+                <div class='course' style="color:white;">
+                    <div class="coursedetail" style="margin-left: 340px;">
+                        <h4><i class="fa fa-graduation-cap fa-1x text-white"></i> LAB ATTENDANCE DETAIL <i class="fa fa-graduation-cap fa-1x text-white"></i></h4>
+                    </div>
+                    <div class="courseinfo" style="border: 1px solid white; float:left; margin-left:220px; margin-top:10px; width: 560px;;">
+                        <div class="courseinfo1" style=" margin-left:10px; margin-top:10px; text-align: center;">
+                            <h6>Present Days: {{lab_attendance_present}}</h6>
+                            <h6>Absent Days: {{lab_attendance_absent}}</h6>
+                            <h6>Total Days: {{lab_total_attendance}}</h6>
+                            <h6>Total Percentage (Present): {{lab_percentage}}%</h6>
+                        </div>
+            </div>
+            </div> 
+
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+<div class="col-xl-12 col-sm-12 p-2">
+    <div class="card card-common bg-danger">
+        <div class="card-body bg-info">
+            <div class="d-flex justify-content-between">
+                <div class='course' style="color:white;">
+                    <div class="coursedetail" style="margin-left: 360px;">
+                        <h4><i class="fa fa-edit fa-1x text-white"></i> ASSIGNMENT DETAIL <i class="fa fa-edit fa-1x text-white"></i></h4>
+                    </div>
+                    <div class="courseinfo" style="border: 1px solid white; float:left; margin-left:220px; margin-top:10px; width: 560px;;">
+                        <div class="courseinfo1" style=" margin-left:10px; margin-top:10px; text-align: center;">
+                            <h6>Assignment Submitted: {{assignment_submitted}}</h6>
+                            <h6>Assignment Not Sumbitted: {{assignment_not_submitted}}</h6>
+                            <h6>Total Assignment: {{total_assignment}}</h6>
+                            <h6>Total Percentage (Assignment Done): {{assignment_percentage}}%</h6>
+                        </div>
+            </div>
+            </div> 
+
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+<div class="col-xl-12 col-sm-12 p-2">
+    <div class="card card-common bg-danger">
+        <div class="card-body bg-info">
+            <div class="d-flex justify-content-between">
+                <div class='course' style="color:white;">
+                    <div class="coursedetail" style="margin-left: 360px;">
+                        <h4><i class="fa fa-edit fa-1x text-white"></i> LAB ASSIGNMENT DETAIL <i class="fa fa-edit fa-1x text-white"></i></h4>
+                    </div>
+                    <div class="courseinfo" style="border: 1px solid white; float:left; margin-left:220px; margin-top:10px; width: 560px;;">
+                        <div class="courseinfo1" style=" margin-left:10px; margin-top:10px; text-align: center;">
+                            <h6>Lab Assignment Submitted: {{lab_assignment_submitted}}</h6>
+                            <h6>Lab Assignment Not Sumbitted: {{lab_assignment_not_submitted}}</h6>
+                            <h6>Total Lab Assignment: {{total_lab_assignment}}</h6>
+                            <h6>Total Percentage (Assignment Done): {{lab_assignment_percentage}}%</h6>
+                        </div>
+            </div>
+            </div> 
+
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+<div class="col-xl-12 col-sm-12 p-2">
+    <div class="card card-common bg-danger">
+        <div class="card-body bg-info">
+            <div class="d-flex justify-content-between">
+                <div class='course' style="color:white;">
+                    <div class="coursedetail" style="margin-left: 420px;">
+                        <h4><i class="fa fa-edit fa-1x text-white"></i> ASSESSMENT <i class="fa fa-edit fa-1x text-white"></i></h4>
+                    </div>
+                    <div class="row" style="width: 140%; margin-left: 55px;;">
+                    <div class="col-xl-4 col-sm-12 p-2">
+                        <div class="card card-common">
+                            <div class="card-body bg-info">
+                                <div class="d-flex justify-content-between">
+                                    <h6>Class Assignment: <h4>{% if class_assessment_marks == 0 %} N/A {% else %} {{class_assessment_marks}} {% endif %}</h4></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-sm-12 p-2">
+                        <div class="card card-common">
+                            <div class="card-body bg-info">
+                                <div class="d-flex justify-content-between">
+                                    <h6>Mid-Assessment: <h4>{% if mid_assessment_marks == 0 %} N/A {% else %} {{mid_assessment_marks}} {% endif %}</h4></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-sm-12 p-2">
+                        <div class="card card-common">
+                            <div class="card-body bg-info">
+                                <div class="d-flex justify-content-between">
+                                    <h6>Final Assessment: <h4>{% if final_assessment_marks == 0 %} N/A {% else %} {{final_assessment_marks}} {% endif %}</h4></h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    
+                
+            </div> 
+
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+<div class="col-xl-12 col-sm-12 p-2">
+    <div class="card card-common bg-danger">
+        <div class="card-body bg-info">
+            <div class="d-flex justify-content-between">
+                <div class='course' style="color:white;">
+                    <div class="coursedetail" style="margin-left: 330px;">
+                        <h3><i class="fa fa-edit fa-1x text-white"></i> Internal Marks Prediction <i class="fa fa-edit fa-1x text-white"></i></h3>
+                        
+                    </div>
+                    <div class="courseinfo" style="border: 1px solid white; float:left; margin-left:220px; margin-top:10px; width: 560px;;">
+                        <div class="courseinfo1" style=" margin-left:10px; margin-top:10px; text-align: center;">
+                            <h4>Your Internal Marks According to your perfomance is</h4>
+                            <h1>{{internal_marks|floatformat:2}}</h1>
+                        </div>
+                    </div>
+            </div> 
+
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+{% endblock %}

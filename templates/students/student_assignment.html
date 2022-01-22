@@ -1,0 +1,64 @@
+{% extends 'master/student_master.html' %}
+{% load static %}
+{% block title %} Dashboard | College Management System {% endblock %}
+{% block body %}
+
+
+
+	<!--cardssection-->
+	<section>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-lg-12 mt-2" style="max-width: 100%;">
+					
+					<div class="row pt-5 mt-3 mb-5">
+
+						<div class="col-xl-12 col-sm-5 p-2">
+							<main role="main" class="container bootdey.com">
+	
+	
+								<div class="my-3 p-3 bg-white rounded box-shadow">
+									<h6 class="border-bottom border-gray pb-2 mb-0">Your Assignments</h6>
+									{% if assignment_detail %}
+										
+										{% for assgn in assignment_detail %}
+										<div class="media text-muted pt-3">
+
+										{% if assgn.teacher_id.user.imageURL %}
+
+	  									<img src="{{ assgn.teacher_id.user.imageURL }}" alt="" class="mr-2 rounded" width="32" height="32">
+	  									{% else %}
+	  										<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="mr-2 rounded" width="32" height="32">
+
+	  									{% endif %}
+	  									<p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+											<strong class="d-block text-gray-dark">{{assgn.question}}</strong>
+											<strong class="d-block text-gray-dark" style="font-weight: 200;">Due Date : {{assgn.date}}</strong>
+											<br>
+											{{assgn.description}} 
+											<br>
+											<a href="{% url 'student_assignment_details' assgn.id %}" class="btn btn-sm mb-2 mt-3 mb-3" style="background-color: #0072CF; text-decoration: none; color: #ffffff;">View Assignment</a>
+										</div>
+										{% endfor %}
+
+									{% else %}
+									
+										<div class="media text-muted pt-3" >
+	  										<h3>YOU HAVE NO ASSIGNMENTS.</h3>
+										</div>
+									{% endif %}
+									
+								</div>
+							</main>
+						</div>
+						
+					</div>
+				
+				</div>
+			
+			</div>
+		
+		</div>
+	</section>
+
+{% endblock %}

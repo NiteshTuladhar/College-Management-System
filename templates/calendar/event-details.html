@@ -1,0 +1,122 @@
+{% extends 'master/master_dashboard.html' %}
+{% load static %}
+{% block title %} Dashboard | College Management System {% endblock %}
+{% block body %}
+	<!--navbar-->
+
+    {% include 'includes/dashboard_sidebar.html' %}
+	<!--end navbar -->
+	<!--model-->
+		<div class="modal fade" id="logout">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Want to leave?</h4>
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>
+					<div class="modal-body">
+						Are you sure you want to leave?
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-success" data-dismiss="modal">Return</button>
+						<a class="btn btn-danger" href = "{% url 'logout' %}">Logout</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+<section>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-10 ml-auto mt-2">
+				<div class="row pt-5 mt-3 mb-5">
+					<div class="col-xl-12 col-sm-6 p-2">
+						<main role="main" class="container bootdey.com">
+							<div class="my-3 p-3 bg-white rounded box-shadow">
+	
+								<div class="clearfix">
+                                
+                                
+
+                                <a class="btn btn-primary left" href="{% url 'calendar' %}"> Calendar </a>
+                                {% if request.user.is_admin %}
+                                <a class="btn btn-info right mr-2" href="{% url 'event_edit' event.id %}"> Edit Event </a>
+                                {% endif %}
+                            </div>
+                            <div class="clearfix">
+                                <h3>Event Name: {{ event.title }}</h3>
+                                <p>From <span style="color: gray;">{{ event.start_time }}</span> To <span style="color: gray;">{{ event.end_time }}</span></p>
+                                <hr>
+                                <p>{{ event.description }}</p>
+                            </div>
+                            <hr>
+                            <div class="clearfix">
+                                <h4 class="left" > Members of this Event</h4>
+                                {% if request.user.is_admin %}
+                                <a class="btn btn-success right" href="{% url 'add_eventmember' event.id %}"> Add Member </a>
+                                {% endif %}
+                            </div>
+                            <table class="table table-bordered">
+                                <thead>                  
+                                    <tr>
+                                        <th style="width: 10px">no.</th>
+                                        <th>Session</th>
+                                        {% if request.user.is_admin %}
+                                        <th>Action</th>
+                                        {% endif %}
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for member in eventmember %}
+                                        <tr role="row">
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ member.session }}</td>
+                                            {% if request.user.is_admin %}
+                                            <td>
+                                                <div class="modal fade" id="{{member.id}}">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title">Want to delete?</h4>
+                                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                    <h6>Are you sure you want to remove '{{member}}'?</h6>
+    
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+                                                                <a class="btn btn-danger" href = "{% url 'remove_event' member.id %}">Yes</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+    
+                                            <!--endmodel-->
+                                            
+                                            
+                                            <a href=""  data-toggle="modal" data-target="#{{member.id}}"><button class="btn btn-danger">Remove</button></a>
+
+                                            
+                                                
+                                            </td>
+                                            {% endif %}
+                                        </tr>
+                                     {% endfor %}
+                                    </tbody>
+                            </table>
+
+  							</div>
+						</main>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+		
+		
+{% endblock %}

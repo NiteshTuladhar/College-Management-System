@@ -1,0 +1,1 @@
+from collegemanagementsys.wsgi import application
